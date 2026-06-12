@@ -112,39 +112,33 @@
             border: none;
             padding: 2px 8px;
             border-radius: 4px;
-            cursor: pointer;
-        }
-        
-        .confirm-bet {
-            width: 100%;
-            background: #28a745;
-            border: none;
-            padding: 12px;
-            border-radius: 4px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .confirm-bet:hover {
-            background: #218838;
-        }
-        
-        footer {
-            background: linear-gradient(to right, #343a40, #212529);
-            color: white;
-            padding: 20px 0;
-            margin-top: 40px;
-        }
-        
-        @media (max-width: 768px) {
-            .bet-slip {
-                position: static;
-                width: 100%;
-                margin-top: 20px;
-            }
-        }
+/* style.css */
+body {
+    background-color: #f8f9fa;
+}
+
+header {
+    background-color: #007bff;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+.banner img {
+    border-radius: 10px;
+}
+
+.betting-slip {
+    position: fixed;
+    right: 20px;
+    top: 100px;
+    width: 300px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
     </style>
 </head>
 <body>
@@ -263,122 +257,45 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const matchesTable = document.getElementById('matchesTable');
-            const betList = document.getElementById('betList');
-            const searchInput = document.getElementById('searchInput');
-            
-            // Sample matches data
-            const sampleMatches = [
-                { timeA: 'Flamengo', timeB: 'Palmeiras', hora: '15:00', campeonato: 'Campeonato Brasileiro', odds: [2.5, 3.2, 2.1] },
-                { timeA: 'São Paulo', timeB: 'Corinthians', hora: '17:30', campeonato: 'Campeonato Brasileiro', odds: [2.8, 3.0, 2.3] },
-                { timeA: 'Grêmio', timeB: 'Internacional', hora: '19:00', campeonato: 'Campeonato Brasileiro', odds: [2.2, 3.5, 2.8] },
-                { timeA: 'Santos', timeB: 'Botafogo', hora: '21:00', campeonato: 'Campeonato Brasileiro', odds: [2.6, 3.1, 2.2] },
-                { timeA: 'Atlético-MG', timeB: 'Cruzeiro', hora: '14:00', campeonato: 'Campeonato Brasileiro', odds: [2.4, 3.3, 2.0] }
-            ];
-            
-            // Initialize
-            loadMatches(sampleMatches);
-            setupEventListeners();
-            
-            // Load matches into table
-            function loadMatches(matches) {
-                matchesTable.innerHTML = '';
-                matches.forEach((match, index) => {
-                    const row = document.createElement('tr');
-                    row.className = 'match-row';
-                    row.innerHTML = `
-                        <td>${match.hora}</td>
-                        <td>${match.campeonato}</td>
-                        <td><img src="https://placehold.co/30x30?text=${match.timeA.charAt(0)}" alt="${match.timeA}" class="team-logo">${match.timeA}</td>
-                        <td>X</td>
-                        <td><img src="https://placehold.co/30x30?text=${match.timeB.charAt(0)}" alt="${match.timeB}" class="team-logo">${match.timeB}</td>
-                        <td>
-                            <div class="btn-group" role="group">
-                                <button class="btn btn-sm btn-primary" onclick="addBet('${match.timeA}', '${match.timeB}', '${match.odds[0]}')">
-                                    <small>${match.odds[0]}</small>
-                                </button>
-                                <button class="btn btn-sm btn-secondary" onclick="addBet('${match.timeA}', '${match.timeB}', '${match.odds[1]}')">
-                                    <small>${match.odds[1]}</small>
-                                </button>
-                                <button class="btn btn-sm btn-danger" onclick="addBet('${match.timeA}', '${match.timeB}', '${match.odds[2]}')">
-                                    <small>${match.odds[2]}</small>
-                                </button>
-                            </div>
-                        </td>
-                    `;
-                    matchesTable.appendChild(row);
-                });
-            }
-            
-            // Add bet to slip
-            window.addBet = function(timeA, timeB, odd) {
-                const existingBet = Array.from(betList.children).find(
-                    item => item.dataset.teamA === timeA && item.dataset.teamB === timeB
-                );
-                
-                if (existingBet) {
-                    existingBet.querySelector('.odd-value').textContent = odd;
-                } else {
-                    const betItem = document.createElement('div');
-                    betItem.className = 'bet-item';
-                    betItem.dataset.teamA = timeA;
-                    betItem.dataset.teamB = timeB;
-                    betItem.innerHTML = `
-                        <div>${timeA} vs ${timeB}</div>
-                        <div>
-                            <span class="odd-value">${odd}</span>
-                            <button class="remove-bet ms-2" onclick="removeBet(this)">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    `;
-                    betList.appendChild(betItem);
-                }
-            };
-            
-            // Remove bet from slip
-            window.removeBet = function(button) {
-                button.closest('.bet-item').remove();
-            };
-            
-            // Setup event listeners
-            function setupEventListeners() {
-                // Search functionality
-                searchInput.addEventListener('input', function() {
-                    const searchTerm = this.value.toLowerCase();
-                    const rows = matchesTable.querySelectorAll('tr.match-row');
-                    
-                    rows.forEach(row => {
-                        const timeA = row.cells[2].textContent.toLowerCase();
-                        const timeB = row.cells[4].textContent.toLowerCase();
-                        
-                        if (timeA.includes(searchTerm) || timeB.includes(searchTerm)) {
-                            row.style.display = '';
-                        } else {
-                            row.style.display = 'none';
-                        }
-                    });
-                });
-                
-                // Confirm bet button
-                document.querySelector('.confirm-bet').addEventListener('click', function() {
-                    if (betList.children.length === 0) {
-                        alert('Adicione pelo menos uma aposta!');
-                        return;
-                    }
-                    
-                    const bets = Array.from(betList.children).map(item => ({
-                        timeA: item.dataset.teamA,
-                        timeB: item.dataset.teamB,
-                        odd: parseFloat(item.querySelector('.odd-value').textContent)
-                    }));
-                    
-                    alert(`Aposta confirmada!\n${bets.map(b => 
-                        `${b.timeA} vs ${b.timeB} (${b.odd})`).join('\n')}`);
-                });
-            }
+        // script.js
+document.addEventListener('DOMContentLoaded', function() {
+    const matchesTable = document.getElementById('matchesTable');
+    const betList = document.getElementById('betList');
+    
+    // Sample matches data
+    const sampleMatches = [
+        { timeA: 'Flamengo', timeB: 'Palmeiras', hora: '15:00', campeonato: 'Campeonato Brasileiro' },
+        { timeA: 'São Paulo', timeB: 'Corinthians', hora: '17:30', campeonato: 'Campeonato Brasileiro' },
+        { timeA: 'Grêmio', timeB: 'Internacional', hora: '19:00', campeonato: 'Campeonato Brasileiro' }
+    ];
+    
+    // Load matches
+    function loadMatches(matches) {
+        matchesTable.innerHTML = '';
+        matches.forEach(match => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${match.hora}</td>
+                <td>${match.campeonato}</td>
+                <td><img src="images/${match.timeA.toLowerCase().replace(' ', '')}.png" alt="${match.timeA}" width="30">${match.timeA}</td>
+                <td>X</td>
+                <td><img src="images/${match.timeB.toLowerCase().replace(' ', '')}.png" alt="${match.timeB}" width="30">${match.timeB}</td>
+                <td><button class="btn btn-sm btn-primary" onclick="addBet('${match.timeA}', '${match.timeB}')">Apostar</button></td>
+            `;
+            matchesTable.appendChild(row);
         });
+    }
+    
+    // Add bet to slip
+    window.addBet = function(timeA, timeB) {
+        const betItem = document.createElement('li');
+        betItem.textContent = `${timeA} vs ${timeB}`;
+        betList.appendChild(betItem);
+    };
+    
+    // Initialize
+    loadMatches(sampleMatches);
+});
     </script>
 </body>
 </html>
