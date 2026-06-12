@@ -1,97 +1,256 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal de Apostas Esportivas</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Portal de Apostas Esportivas | Bet365 Style</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
+        :root {
+            --primary: #007bff;
+            --secondary: #6c757d;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gradient: linear-gradient(135deg, #007bff, #0056b3);
         }
         
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
         header {
-            background: linear-gradient(to right, #007bff, #0056b3);
+            background: var(--gradient);
             color: white;
-            padding: 15px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 10px 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         
         .logo {
-            font-size: 24px;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .login-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: bold;
         }
         
-        .login-btn {
-            background: #fff;
-            color: #007bff;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s;
+        /* Main Layout */
+        .main-container {
+            min-height: calc(100vh - 200px);
         }
         
-        .login-btn:hover {
-            background: #e9ecef;
-        }
-        
+        /* Sidebar Styles */
         .sidebar {
-            background: #fff;
+            background: white;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             height: 100%;
-            padding: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
         }
         
-        .sidebar h4 {
-            border-bottom: 1px solid #eee;
+        .sidebar-title {
+            border-bottom: 2px solid var(--primary);
             padding-bottom: 10px;
             margin-bottom: 15px;
+            color: var(--primary);
         }
         
-        .team-logo {
-            width: 30px;
-            margin-right: 10px;
-            vertical-align: middle;
+        .sidebar-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: all 0.2s;
         }
         
-        .banner {
+        .sidebar-item:hover {
+            background: #f8f9fa;
+            padding-left: 10px;
+        }
+        
+        .sidebar-item.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Banner Styles */
+        .banner-container {
+            position: relative;
             border-radius: 8px;
             overflow: hidden;
             margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            height: 300px;
         }
         
-        .banner img {
+        .banner-image {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
         }
         
-        .search-box {
+        .banner-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .banner-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 20px;
+            color: white;
+        }
+        
+        /* Search Styles */
+        .search-container {
             margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .search-input {
+            padding-left: 40px;
+            border-radius: 30px;
+            border: 2px solid var(--primary);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+        
+        /* Match Table Styles */
+        .match-table {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
         }
         
         .match-row {
             transition: all 0.2s;
+            border-bottom: 1px solid #eee;
         }
         
         .match-row:hover {
-            background: #e9f7fe;
+            background: #f8f9fa;
         }
         
+        .match-time {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .match-league {
+            font-size: 12px;
+            color: var(--secondary);
+        }
+        
+        .team-name {
+            font-weight: 600;
+        }
+        
+        .odds-container {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .odds-btn {
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .odds-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .odds-1 { background: var(--success); color: white; }
+        .odds-X { background: var(--warning); color: black; }
+        .odds-2 { background: var(--danger); color: white; }
+        
+        /* Betting Slip */
         .bet-slip {
             position: fixed;
             right: 20px;
             top: 100px;
-            width: 300px;
+            width: 350px;
             background: white;
-            padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             z-index: 1000;
+            max-height: calc(100vh - 150px);
+            overflow-y: auto;
+            transition: all 0.3s;
+        }
+        
+        .bet-slip-header {
+            padding: 15px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .bet-slip-header h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        
+        .close-slip {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .bet-list {
+            padding: 15px;
         }
         
         .bet-item {
@@ -99,46 +258,172 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 0;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px dashed #eee;
         }
         
         .bet-item:last-child {
             border-bottom: none;
         }
         
+        .bet-details {
+            flex-grow: 1;
+        }
+        
+        .bet-teams {
+            font-weight: 600;
+        }
+        
+        .bet-odd {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
         .remove-bet {
             background: #dc3545;
             color: white;
             border: none;
-            padding: 2px 8px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .bet-summary {
+            padding: 15px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+        
+        .bet-total {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 18px;
+        }
+        
+        .confirm-bet {
+            width: 100%;
+            background: var(--success);
+            border: none;
+            padding: 12px;
             border-radius: 4px;
-/* style.css */
-body {
-    background-color: #f8f9fa;
-}
-
-header {
-    background-color: #007bff;
-}
-
-.card {
-    margin-bottom: 20px;
-}
-
-.banner img {
-    border-radius: 10px;
-}
-
-.betting-slip {
-    position: fixed;
-    right: 20px;
-    top: 100px;
-    width: 300px;
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .confirm-bet:hover {
+            background: #218838;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, #343a40, #212529);
+            color: white;
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+        
+        .footer-section h5 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        /* Admin Panel */
+        .admin-panel {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .admin-header {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--secondary);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .bet-slip {
+                position: static;
+                width: 100%;
+                margin-top: 20px;
+            }
+            
+            .banner-container {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .login-section {
+                display: none;
+            }
+            
+            .sidebar-item {
+                padding: 8px 0;
+            }
+            
+            .banner-container {
+                height: 200px;
+            }
+            
+            .bet-slip {
+                width: calc(100% - 20px);
+            }
+        }
+        
+        /* Animations */
+        .animate__animated.animate__fadeInUp {
+            animation-duration: 0.5s;
+        }
     </style>
 </head>
 <body>
@@ -146,69 +431,91 @@ header {
     <header>
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
-                <div class="logo">
-                    <i class="fas fa-futbol"></i> Portal de Apostas Esportivas
+                <div class="logo animate__animated animate__fadeInLeft">
+                    <i class="fas fa-dice"></i> BETSPORTS
                 </div>
-                <button class="login-btn">
-                    <i class="fas fa-user"></i> Entrar
-                </button>
+                
+                <div class="login-section animate__animated animate__fadeInRight">
+                    <div class="user-menu">
+                        <div class="user-avatar">U</div>
+                        <span>Bem-vindo, Usuário!</span>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <div class="container mt-4">
+    <div class="container main-container">
         <div class="row">
             <!-- Sidebar -->
-            <div class="col-md-3 mb-4">
-                <div class="sidebar">
-                    <h4><i class="fas fa-trophy"></i> Campeonatos</h4>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-flag"></i> Campeonato Brasileiro</li>
-                        <li class="mb-2"><i class="fas fa-flag"></i> Copa Libertadores</li>
-                        <li class="mb-2"><i class="fas fa-flag"></i> Champions League</li>
-                        <li class="mb-2"><i class="fas fa-flag"></i> Copa do Brasil</li>
-                        <li class="mb-2"><i class="fas fa-flag"></i> Liga dos Campeões</li>
-                    </ul>
+            <div class="col-lg-3 col-md-4 mb-4">
+                <div class="sidebar animate__animated animate__fadeInLeft">
+                    <h4 class="sidebar-title">Ligas & Campeonatos</h4>
+                    <div class="sidebar-item active">
+                        <i class="fas fa-flag"></i> Campeonato Brasileiro
+                    </div>
+                    <div class="sidebar-item">
+                        <i class="fas fa-flag"></i> Copa Libertadores
+                    </div>
+                    <div class="sidebar-item">
+                        <i class="fas fa-flag"></i> Champions League
+                    </div>
+                    <div class="sidebar-item">
+                        <i class="fas fa-flag"></i> Copa do Brasil
+                    </div>
+                    <div class="sidebar-item">
+                        <i class="fas fa-flag"></i> Liga dos Campeões
+                    </div>
                     
-                    <h4><i class="fas fa-star"></i> Times Populares</h4>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-star"></i> Flamengo</li>
-                        <li class="mb-2"><i class="fas fa-star"></i> Corinthians</li>
-                        <li class="mb-2"><i class="fas fa-star"></i> São Paulo</li>
-                        <li class="mb-2"><i class="fas fa-star"></i> Palmeiras</li>
-                    </ul>
+                    <h4 class="sidebar-title mt-4">Times Populares</h4>
+                    <div class="sidebar-item">
+                        <i class="fas fa-futbol"></i> Flamengo
+                    </div>
+                    <div class="sidebar-item">
+                        <i class="fas fa-futbol"></i> Corinthians
+                    </div>
+                    <div class="sidebar-item">
+                        <i class="fas fa-futbol"></i> São Paulo
+                    </div>
+                    <div class="sidebar-item">
+                        <i class="fas fa-futbol"></i> Palmeiras
+                    </div>
                 </div>
             </div>
 
             <!-- Main Content Area -->
-            <div class="col-md-9">
+            <div class="col-lg-9 col-md-8">
                 <!-- Banner -->
-                <div class="banner mb-4">
-                    <img src="https://placehold.co/800x200?text=Futebol+de+hoje" alt="Jogadores de futebol">
+                <div class="banner-container animate__animated animate__fadeInUp">
+                    <img src="https://placehold.co/800x300?text=Futebol+de+hoje" alt="Jogadores de futebol" class="banner-image">
+                    <div class="banner-overlay">
+                        <h3>Partidas ao vivo</h3>
+                        <p>Veja todas as partidas em tempo real</p>
+                    </div>
                 </div>
 
                 <!-- Search -->
-                <div class="search-box">
+                <div class="search-container animate__animated animate__fadeInUp">
                     <div class="input-group">
-                        <span class="input-group-text">
+                        <span class="input-group-text search-icon">
                             <i class="fas fa-search"></i>
                         </span>
-                        <input type="text" id="searchInput" placeholder="Buscar times..." class="form-control">
+                        <input type="text" id="searchInput" placeholder="Buscar times..." class="form-control search-input">
                     </div>
                 </div>
 
                 <!-- Matches Table -->
-                <div class="table-responsive">
-                    <table class="table table-striped">
+                <div class="match-table animate__animated animate__fadeInUp">
+                    <table class="table table-borderless">
                         <thead>
                             <tr>
                                 <th>Hora</th>
                                 <th>Campeonato</th>
                                 <th>Time A</th>
-                                <th>X</th>
+                                <th></th>
                                 <th>Time B</th>
-                                <th>Aposta</th>
+                                <th>Odds</th>
                             </tr>
                         </thead>
                         <tbody id="matchesTable">
@@ -216,86 +523,64 @@ header {
                         </tbody>
                     </table>
                 </div>
+                
+                <!-- Admin Panel (Hidden by default) -->
+                <div id="adminPanel" class="admin-panel" style="display: none;">
+                    <div class="admin-header">
+                        <h3>Painel Administrativo</h3>
+                    </div>
+                    
+                    <div class="admin-stats">
+                        <div class="stat-card">
+                            <div class="stat-number">1,248</div>
+                            <div class="stat-label">Apostas Ativas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">R$ 45,230</div>
+                            <div class="stat-label">Lucro Total</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">24</div>
+                            <div class="stat-label">Partidas Hoje</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">36</div>
+                            <div class="stat-label">Times</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <button class="btn btn-primary" onclick="toggleAdminPanel()">Mostrar/Ocultar Painel</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Betting Slip -->
-    <div class="bet-slip">
-        <h4><i class="fas fa-shopping-cart"></i> Bilhete de Apostas</h4>
-        <div id="betList">
+    <div class="bet-slip animate__animated animate__slideInRight" id="betSlip">
+        <div class="bet-slip-header">
+            <h3><i class="fas fa-shopping-cart"></i> Bilhete de Apostas</h3>
+            <button class="close-slip" onclick="toggleBetSlip()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="bet-list" id="betList">
             <!-- Bets will appear here -->
         </div>
-        <button class="confirm-bet mt-3">
-            <i class="fas fa-check-circle"></i> Confirmar Aposta
-        </button>
+        <div class="bet-summary">
+            <div class="d-flex justify-content-between">
+                <div>Total:</div>
+                <div class="bet-total">R$ 0,00</div>
+            </div>
+            <button class="confirm-bet mt-3" onclick="confirmBets()">
+                <i class="fas fa-check-circle"></i> Confirmar Aposta
+            </button>
+        </div>
     </div>
 
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <h5><i class="fas fa-info-circle"></i> Sobre</h5>
-                    <p>Portal de apostas esportivas com informações atualizadas de jogos e resultados.</p>
-                </div>
-                <div class="col-md-4">
-                    <h5><i class="fas fa-headset"></i> Contato</h5>
-                    <p>Email: contato@esportesbetting.com</p>
-                    <p>Telefone: (11) 9999-9999</p>
-                </div>
-                <div class="col-md-4">
-                    <h5><i class="fas fa-share-alt"></i> Redes Sociais</h5>
-                    <a href="#" class="text-white me-3"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            <hr>
-            <p class="text-center">&copy; 2023 Portal de Apostas Esportivas. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-    <script>
-        // script.js
-document.addEventListener('DOMContentLoaded', function() {
-    const matchesTable = document.getElementById('matchesTable');
-    const betList = document.getElementById('betList');
-    
-    // Sample matches data
-    const sampleMatches = [
-        { timeA: 'Flamengo', timeB: 'Palmeiras', hora: '15:00', campeonato: 'Campeonato Brasileiro' },
-        { timeA: 'São Paulo', timeB: 'Corinthians', hora: '17:30', campeonato: 'Campeonato Brasileiro' },
-        { timeA: 'Grêmio', timeB: 'Internacional', hora: '19:00', campeonato: 'Campeonato Brasileiro' }
-    ];
-    
-    // Load matches
-    function loadMatches(matches) {
-        matchesTable.innerHTML = '';
-        matches.forEach(match => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${match.hora}</td>
-                <td>${match.campeonato}</td>
-                <td><img src="images/${match.timeA.toLowerCase().replace(' ', '')}.png" alt="${match.timeA}" width="30">${match.timeA}</td>
-                <td>X</td>
-                <td><img src="images/${match.timeB.toLowerCase().replace(' ', '')}.png" alt="${match.timeB}" width="30">${match.timeB}</td>
-                <td><button class="btn btn-sm btn-primary" onclick="addBet('${match.timeA}', '${match.timeB}')">Apostar</button></td>
-            `;
-            matchesTable.appendChild(row);
-        });
-    }
-    
-    // Add bet to slip
-    window.addBet = function(timeA, timeB) {
-        const betItem = document.createElement('li');
-        betItem.textContent = `${timeA} vs ${timeB}`;
-        betList.appendChild(betItem);
-    };
-    
-    // Initialize
-    loadMatches(sampleMatches);
-});
-    </script>
-</body>
-</html>
+                <div class="
