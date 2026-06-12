@@ -436,7 +436,7 @@
                 </div>
                 
                 <div class="login-section animate__animated animate__fadeInRight">
-                    <div class="user-menu">
+                    <div class="user-menu" onclick="toggleUserMenu()">
                         <div class="user-avatar">U</div>
                         <span>Bem-vindo, Usuário!</span>
                     </div>
@@ -452,33 +452,33 @@
             <div class="col-lg-3 col-md-4 mb-4">
                 <div class="sidebar animate__animated animate__fadeInLeft">
                     <h4 class="sidebar-title">Ligas & Campeonatos</h4>
-                    <div class="sidebar-item active">
+                    <div class="sidebar-item active" onclick="loadLeague('campeonato-brasileiro')">
                         <i class="fas fa-flag"></i> Campeonato Brasileiro
                     </div>
-                    <div class="sidebar-item">
+                    <div class="sidebar-item" onclick="loadLeague('copa-libertadores')">
                         <i class="fas fa-flag"></i> Copa Libertadores
                     </div>
-                    <div class="sidebar-item">
+                    <div class="sidebar-item" onclick="loadLeague('champions-league')">
                         <i class="fas fa-flag"></i> Champions League
                     </div>
-                    <div class="sidebar-item">
+                    <div class="sidebar-item" onclick="loadLeague('copa-do-brasil')">
                         <i class="fas fa-flag"></i> Copa do Brasil
                     </div>
-                    <div class="sidebar-item">
+                    <div class="sidebar-item" onclick="loadLeague('liga-dos-campeoes')">
                         <i class="fas fa-flag"></i> Liga dos Campeões
                     </div>
                     
                     <h4 class="sidebar-title mt-4">Times Populares</h4>
-                    <div class="sidebar-item">
+                    <div class="sidebar-item" onclick="loadTeam('flamengo')">
                         <i class="fas fa-futbol"></i> Flamengo
                     </div>
-                    <div class="sidebar-item">
+                    <div class="sidebar-item" onclick="loadTeam('corinthians')">
                         <i class="fas fa-futbol"></i> Corinthians
                     </div>
-                    <div class="sidebar-item">
+                    <div class="sidebar-item" onclick="loadTeam('sao-paulo')">
                         <i class="fas fa-futbol"></i> São Paulo
                     </div>
-                    <div class="sidebar-item">
+                    <div class="sidebar-item" onclick="loadTeam('palmeiras')">
                         <i class="fas fa-futbol"></i> Palmeiras
                     </div>
                 </div>
@@ -569,18 +569,4 @@
             <!-- Bets will appear here -->
         </div>
         <div class="bet-summary">
-            <div class="d-flex justify-content-between">
-                <div>Total:</div>
-                <div class="bet-total">R$ 0,00</div>
-            </div>
-            <button class="confirm-bet mt-3" onclick="confirmBets()">
-                <i class="fas fa-check-circle"></i> Confirmar Aposta
-            </button>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="
+            <
